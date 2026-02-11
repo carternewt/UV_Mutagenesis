@@ -6,8 +6,8 @@
 #SBATCH --time=1:00:00
 #SBATCH --mail-user=carter.newton@uga.edu
 #SBATCH --mail-type=START,END,FAIL
-#SBATCH --error=/work/lylab/cjn40747/comp_genomics/logs/%j.err
-#SBATCH --output=/work/lylab/cjn40747/comp_genomics/logs/%j.out
+#SBATCH --error=/work/lylab/cjn40747/UV_comp/logs/%j.err
+#SBATCH --output=/work/lylab/cjn40747/UV_comp/logs/%j.out
 
 ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
 
