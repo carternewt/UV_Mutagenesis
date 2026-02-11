@@ -11,8 +11,8 @@
 
 ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
 
-$OUT='/work/lylab/cjn40747/UV_comp'
-$HOME='/home/cjn40747/UV_Mutagenesis'
+OUT='/work/lylab/cjn40747/UV_comp'
+HOME='/home/cjn40747/UV_Mutagenesis'
 
 mkdir -p $OUT/orig_genome
 ncbi-genome-download -A $HOME/accessions_ID.csv -o $OUT/orig_genome
