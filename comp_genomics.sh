@@ -15,4 +15,4 @@ OUT='/work/lylab/cjn40747/UV_comp'
 HOME='/home/cjn40747/UV_Mutagenesis'
 
 mkdir -p $OUT/orig_genome
-ncbi-genome-download -A $HOME/accessions_ID.csv -o $OUT/orig_genome
+ncbi-genome-download -A $HOME/accessions_ID.csv -o $OUT/orig_genome bacteria
