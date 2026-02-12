@@ -16,4 +16,4 @@ HOME='/home/cjn40747/UV_Mutagenesis'
 ACCESSIONS=$(paste -sd, $HOME/accessions_ID.txt)
 
 mkdir -p $OUT/orig_genome
-ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output-folder $OUT/orig_genome --formats fasta
+ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output-folder $OUT/orig_genome --formats fasta bacteria
