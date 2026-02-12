@@ -10,6 +10,7 @@
 #SBATCH --output=/work/lylab/cjn40747/UV_comp/logs/%j.out
 
 ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
+ml bakta/1.11
 
 OUT='/work/lylab/cjn40747/UV_comp'
 HOME='/home/cjn40747/UV_Mutagenesis'
@@ -17,3 +18,12 @@ ACCESSIONS=$(paste -sd, $HOME/accessions_ID.txt)
 
 mkdir -p $OUT/orig_genome
 ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output-folder $OUT/orig_genome --formats fasta bacteria
+
+mkdir -p $OUT/bakta
+bakta_db download --output $OUT/bakta --type full
+find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
+    dir=$(dirname "$file")
+    out_dir="$OUT/bakta/$(basename "$dir")"
+    name=$(basename "$dir")
+    mkdir -p $out_dir
+    bakta --db $OUT/bakta/db --verbose --output $outdir --prefix $name --genus Paenibacillus --threads 8 $out_dir/$name.fasta --force
