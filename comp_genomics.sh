@@ -26,3 +26,4 @@ find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file
     name=$(basename "$dir")
     mkdir -p $out_dir
     bakta --db $OUT/bakta/db --verbose --output $out_dir --prefix $name --genus Paenibacillus --threads 8 "$file" --force
+done
