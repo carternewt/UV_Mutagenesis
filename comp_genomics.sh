@@ -13,6 +13,7 @@ ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
 
 OUT='/work/lylab/cjn40747/UV_comp'
 HOME='/home/cjn40747/UV_Mutagenesis'
+ACCESSIONS=$(paste -sd, $HOME/accessions_ID.txt)
 
 mkdir -p $OUT/orig_genome
-ncbi-genome-download --assembly-accessions $HOME/accessions_ID.csv --output-folder $OUT/orig_genome --formats fasta bacteria
+ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output-folder $OUT/orig_genome --formats fasta
