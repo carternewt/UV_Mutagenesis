@@ -3,7 +3,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=24G
-#SBATCH --time=1:00:00
+#SBATCH --time=1-00:00:00
 #SBATCH --mail-user=carter.newton@uga.edu
 #SBATCH --mail-type=START,END,FAIL
 #SBATCH --error=/work/lylab/cjn40747/UV_comp/logs/%j.err
