@@ -32,7 +32,10 @@ done
 
 mkdir -p $OUT/QC
 mkdir -p $OUT/QC/genomes
-cp $OUT/orig_genome/refseq/bacteria/GCF*.gz $OUT/QC/genomes
+find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
+    cp "$file" $OUT/QC/genomes
+done
+
 mkdir -p $OUT/QC/tree
 checkm tree -t 8 $OUT/QC/genomes $OUT/QC/tree
 checkm tree_qa -o 2 $OUT/QC/tree_qa
