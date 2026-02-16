@@ -39,8 +39,7 @@ done
 
 mkdir -p $OUT/QC/tree
 checkm tree -t 8 $OUT/QC/genomes $OUT/QC/tree
-mkdir -p $OUT/QC/tree_qa
-checkm tree_qa -o 2 $OUT/QC/tree_qa
+checkm tree_qa -o 2 $OUT/QC/tree
 mkdir -p $OUT/QC/lineage_set
 checkm lineage_set $OUT/QC/lineage_set lineage.ms
 mkdir -p $OUT/QC/analyze
