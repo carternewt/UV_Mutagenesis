@@ -33,7 +33,7 @@ done
 mkdir -p $OUT/QC
 mkdir -p $OUT/QC/genomes
 find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
-    cp "$file" $OUT/QC/genomes
+    gunzip -c "$file" > $OUT/QC/genomes
 done
 
 mkdir -p $OUT/QC/tree
