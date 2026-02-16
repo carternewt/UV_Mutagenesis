@@ -39,11 +39,10 @@ done
 
 mkdir -p $OUT/QC/tree
 checkm tree -t 8 $OUT/QC/genomes $OUT/QC/tree
-checkm tree_qa -o 2 $OUT/QC/tree
-mkdir -p $OUT/QC/lineage_set
-checkm lineage_set $OUT/QC/lineage_set lineage.ms
+checkm tree_qa $OUT/QC/tree
+checkm lineage_set $OUT/QC/tree $OUT/QC/lineage.ms
 mkdir -p $OUT/QC/analyze
-checkm analyze $OUT/QC/lineage_set/lineage.ms $OUT/QC/genomes $OUT/QC/analyze
+checkm analyze $OUT/QC/lineage.ms $OUT/QC/genomes $OUT/QC/analyze
 mkdir -p $OUT/QC/qa
 checkm qa $OUT/QC/lineage_set/lineage.ms $OUT/QC/qa
 
