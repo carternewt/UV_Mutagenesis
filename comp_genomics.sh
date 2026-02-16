@@ -11,6 +11,8 @@
 
 ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
 ml bakta/1.11
+ml QUAST/5.2.0
+ml CheckM/1.2.2-foss-2022a
 
 OUT='/work/lylab/cjn40747/UV_comp'
 HOME='/home/cjn40747/UV_Mutagenesis'
@@ -26,4 +28,21 @@ find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file
     name=$(basename "$dir")
     mkdir -p $out_dir
     bakta --db $OUT/bakta/db --verbose --output $out_dir --prefix $name --genus Paenibacillus --threads 8 "$file" --force
+done
+
+mkdir -p $OUT/QC
+mkdir -p $OUT/QC/genomes
+cp $OUT/orig_genome/refseq/bacteria/GCF*.gz $OUT/QC/genomes
+mkdir -p $OUT/QC/tree
+checkm tree -t 8 $OUT/QC/genomes $OUT/QC/tree
+checkm tree_qa -o 2 $OUT/QC/tree_qa
+checkm lineage_set $OUT/QC/lineage_set lineage.ms
+checkm analyze $OUT/QC/lineage_set/lineage.ms $OUT/QC/genomes $OUT/QC/analyze
+checkm qa $OUT/QC/lineage_set/lineage.ms $OUT/QC/qa
+
+find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
+    dir=$(dirname "$file")
+    out_dir="$OUT/QC/$(basename "$dir")"
+    mkdir -p $out_dir
+    quast -o $out_dir -b -t 8 "$file"
 done
