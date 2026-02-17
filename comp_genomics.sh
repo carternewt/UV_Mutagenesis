@@ -38,7 +38,7 @@ find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file
 done
 
 mkdir -p $OUT/QC/checkm
-checkm lineage_wf $OUT/QC/genomes $OUT/QC/checkm
+checkm lineage_wf -t 8 $OUT/QC/genomes $OUT/QC/checkm
 
 find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
     dir=$(dirname "$file")
