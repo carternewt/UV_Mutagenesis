@@ -37,14 +37,8 @@ find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file
     gunzip -c "$file" > $OUT/QC/genomes/$out
 done
 
-mkdir -p $OUT/QC/tree
-checkm tree -t 8 $OUT/QC/genomes $OUT/QC/tree
-checkm tree_qa $OUT/QC/tree
-checkm lineage_set $OUT/QC/tree $OUT/QC/lineage.ms
-mkdir -p $OUT/QC/analyze
-checkm analyze $OUT/QC/lineage.ms $OUT/QC/genomes $OUT/QC/analyze
-mkdir -p $OUT/QC/qa
-checkm qa $OUT/QC/lineage_set/lineage.ms $OUT/QC/qa
+mkdir -p $OUT/QC/checkm
+checkm lineage_wf $OUT/QC/genomes $OUT/QC/checkm
 
 find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
     dir=$(dirname "$file")
