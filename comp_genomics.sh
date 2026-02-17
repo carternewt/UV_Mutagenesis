@@ -37,12 +37,15 @@ find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file
     gunzip -c "$file" > $OUT/QC/genomes/$out
 done
 
-mkdir -p $OUT/QC/checkm
-checkm lineage_wf -t 8 $OUT/QC/genomes $OUT/QC/checkm
-
 find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
     dir=$(dirname "$file")
     out_dir="$OUT/QC/$(basename "$dir")"
     mkdir -p $out_dir
     quast -o $out_dir -b -t 8 "$file"
 done
+
+ml purge
+ml Miniforge3/24.7.1-0
+source activate /home/cjn40747/checkm2
+mkdir -p $OUT/checkm2
+checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path /work/lylab/cjn40747/F7_5_genome/checkm2/database/CheckM2_database/uniref100.KO.1.dmnd --force
