@@ -46,6 +46,6 @@ done
 
 ml purge
 ml Miniforge3/24.11.3-0
-conda activate /home/cjn40747/checkm2
+source activate /home/cjn40747/checkm2
 mkdir -p $OUT/checkm2
 checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path /work/lylab/cjn40747/F7_5_genome/checkm2/database/CheckM2_database/uniref100.KO.1.dmnd --force
