@@ -44,9 +44,9 @@ find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file
     gunzip -c "$file" > $OUT/QC/genomes/$out
 done
 
-if [ ! -f $OUT/CheckM2_database/uniref100.KO.1.dmnd ]; then
-    checkm2 database --download $OUT
-fi
+DB="$OUT/CheckM2_database/uniref100.KO.1.dmnd"
+
+[ -f "$DB" ] || checkm2 database --download --path "$OUT"
 
 mkdir -p $OUT/checkm2
 checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path $OUT/CheckM2_database/uniref100.KO.1.dmnd --force
