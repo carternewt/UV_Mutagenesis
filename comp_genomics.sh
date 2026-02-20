@@ -12,10 +12,10 @@
 ml purge
 ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
 
-DB="$OUT/CheckM2_database/uniref100.KO.1.dmnd"
 OUT='/work/lylab/cjn40747/UV_comp'
 HOME='/home/cjn40747/UV_Mutagenesis'
 ACCESSIONS=$(paste -sd, $HOME/accessions_ID.txt)
+DB="$OUT/CheckM2_database/uniref100.KO.1.dmnd"
 
 mkdir -p $OUT/orig_genome
 ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output-folder $OUT/orig_genome --formats fasta bacteria
