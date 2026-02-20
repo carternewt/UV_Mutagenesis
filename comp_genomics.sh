@@ -9,6 +9,7 @@
 #SBATCH --error=/work/lylab/cjn40747/UV_comp/logs/%j.err
 #SBATCH --output=/work/lylab/cjn40747/UV_comp/logs/%j.out
 
+ml purge
 ml ncbi-genome-download/0.3.3-GCCcore-12.3.0
 
 DB="$OUT/CheckM2_database/uniref100.KO.1.dmnd"
