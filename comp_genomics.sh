@@ -63,7 +63,7 @@ find $OUT/QC/genomes -name *.fna -type f | while read -r file; do
     out_dir="$OUT/prokka/$(basename "$dir")"
     name=$(basename "$dir")
     mkdir -p $out_dir
-    prokka --outdir $out_dir --force --prefix $name --genus Paenibacillus --cpus 8 $file
+    prokka --outdir "$out_dir" --force --prefix "$name" --genus Paenibacillus --cpus 8 "$file"
 done
 
 ml purge
