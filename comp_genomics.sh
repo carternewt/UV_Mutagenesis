@@ -23,22 +23,22 @@ ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output
 ml purge
 ml bakta/1.11
 mkdir -p $OUT/bakta
-find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
-    dir=$(dirname "$file")
-    out_dir="$OUT/bakta/$(basename "$dir")"
-    name=$(basename "$dir")
-    mkdir -p $out_dir
-    bakta --db $OUT/bakta/db --verbose --output $out_dir --prefix $name --genus Paenibacillus --threads 8 "$file" --force
-done
+#find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
+#    dir=$(dirname "$file")
+#    out_dir="$OUT/bakta/$(basename "$dir")"
+#    name=$(basename "$dir")
+#    mkdir -p $out_dir
+#    bakta --db $OUT/bakta/db --verbose --output $out_dir --prefix $name --genus Paenibacillus --threads 8 "$file" --force
+#done
 
 ml purge
 ml QUAST/5.2.0
-find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
-    dir=$(dirname "$file")
-    out_dir="$OUT/QC/$(basename "$dir")"
-    mkdir -p $out_dir
-    quast -o $out_dir -b -t 8 "$file"
-done
+#find $OUT/orig_genome/refseq/bacteria -name GCF*.gz -type f | while read -r file; do
+#    dir=$(dirname "$file")
+#    out_dir="$OUT/QC/$(basename "$dir")"
+#    mkdir -p $out_dir
+#    quast -o $out_dir -b -t 8 "$file"
+#done
 
 mkdir -p $OUT/QC
 mkdir -p $OUT/QC/genomes
@@ -55,3 +55,12 @@ ml CheckM2/1.1.0-foss-2024a
 mkdir -p $OUT/checkm2
 checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path $DB --force
 
+ml purge
+ml Roary/3.13.0-foss-2022a
+
+mkdir -p $OUT/roary
+find $OUT/bakta -name *.gff3 -type f | while read -r file; do
+    cp $file $OUT/roary
+done
+
+roary -e -n -p 8 $OUT/roary/*.gff3
