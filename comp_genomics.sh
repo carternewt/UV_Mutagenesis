@@ -53,7 +53,7 @@ ml CheckM2/1.1.0-foss-2024a
 [ -f "$DB" ] || checkm2 database --download --path "$OUT"
 
 mkdir -p $OUT/checkm2
-checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path $DB --force
+#checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path $DB --force
 
 ml purge
 ml Roary/3.13.0-foss-2022a
