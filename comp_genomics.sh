@@ -63,4 +63,4 @@ find $OUT/bakta -name *.gff3 -type f | while read -r file; do
     cp $file $OUT/roary
 done
 
-roary -e -n -v -p 8 $OUT/roary/*.gff3
+roary -e -n -v -p 8 -f $OUT/roary $OUT/roary/*.gff3
