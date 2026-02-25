@@ -73,4 +73,4 @@ find $OUT/prokka -name *.gff -type f | while read -r file; do
     cp $file $OUT/roary
 done
 
-roary -e -n -v -p 8 -f $OUT/roary $OUT/roary/*.gff
+roary -e -n -v -p 8 -f $OUT/roary_prokka $OUT/roary/*.gff
