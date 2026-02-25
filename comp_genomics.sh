@@ -79,7 +79,7 @@ ml purge
 ml eggnog-mapper/2.1.12-foss-2023a
 mkdir -p $OUT/eggnog
 find $OUT/prokka -name *.faa -type f | while read -r file; do
-    cat $file > $OUT/eggnog/compiled_Paenibacillus_proteins.faa
+    cat $file >> $OUT/eggnog/compiled_Paenibacillus_proteins.faa
 done
 
 emapper.py -i $OUT/eggnog/compiled_Paenibacillus_proteins.faa --itype proteins --output eggnog_prokka --output_dir $OUT/eggnog --cpu 8
