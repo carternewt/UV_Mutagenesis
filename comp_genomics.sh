@@ -55,22 +55,31 @@ ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output
 #mkdir -p $OUT/checkm2
 #checkm2 predict --threads 8 --input $OUT/QC/genomes --output-directory $OUT/checkm2/results --database_path $DB --force
 
-ml purge
-ml prokka/1.14.5-gompi-2023a
-mkdir -p $OUT/prokka
-find $OUT/QC/genomes -name *.fna -type f | while read -r file; do
-    name=$(basename "$file" .fna)
-    out_dir="$OUT/prokka/$name"
-    mkdir -p $out_dir
-    prokka --outdir "$out_dir" --force --prefix "$name" --genus Paenibacillus --cpus 8 "$file"
-done
+#ml purge
+#ml prokka/1.14.5-gompi-2023a
+#mkdir -p $OUT/prokka
+#find $OUT/QC/genomes -name *.fna -type f | while read -r file; do
+#    name=$(basename "$file" .fna)
+#   out_dir="$OUT/prokka/$name"
+#    mkdir -p $out_dir
+#    prokka --outdir "$out_dir" --force --prefix "$name" --genus Paenibacillus --cpus 8 "$file"
+#done
+
+#ml purge
+#ml Roary/3.13.0-foss-2022a
+
+#mkdir -p $OUT/roary
+#find $OUT/prokka -name *.gff -type f | while read -r file; do
+#    cp $file $OUT/roary
+#done
+
+#roary -e -n -v -p 8 -cd 80 -f $OUT/roary_prokka $OUT/roary/*.gff
 
 ml purge
-ml Roary/3.13.0-foss-2022a
-
-mkdir -p $OUT/roary
-find $OUT/prokka -name *.gff -type f | while read -r file; do
-    cp $file $OUT/roary
+ml eggnog-mapper/2.1.12-foss-2023a
+mkdir -p $OUT/eggnog
+find $OUT/prokka -name *.faa -type f | while read -r file; do
+    cat $file > $OUT/eggnog/compiled_Paenibacillus_proteins.faa
 done
 
-roary -e -n -v -p 8 -f $OUT/roary_prokka $OUT/roary/*.gff
+emapper.py -i $OUT/eggnog/compiled_Paenibacillus_proteins.faa --itype proteins --output eggnog_prokka --output_dir $OUT/eggnog --cpu 8
