@@ -68,18 +68,19 @@ ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output
 #ml purge
 #ml Roary/3.13.0-foss-2022a
 
-#mkdir -p $OUT/roary
-#find $OUT/prokka -name *.gff -type f | while read -r file; do
-#    cp $file $OUT/roary
-#done
-
-#roary -e -n -v -p 8 -cd 80 -f $OUT/roary_prokka $OUT/roary/*.gff
-
-ml purge
-ml eggnog-mapper/2.1.12-foss-2023a
-mkdir -p $OUT/eggnog
-find $OUT/prokka -name *.faa -type f | while read -r file; do
-    cat $file >> $OUT/eggnog/compiled_Paenibacillus_proteins.faa
+mkdir -p $OUT/panaroo
+find $OUT/prokka -name *.gff -type f | while read -r file; do
+    cp $file $OUT/panaroo
 done
 
-emapper.py -i $OUT/eggnog/compiled_Paenibacillus_proteins.faa --itype proteins --output eggnog_prokka --output_dir $OUT/eggnog --cpu 8
+mkdir -p $OUT/panaroo/run1
+panaroo -i *.gff --clean-mode strict --remove-invalid-genes --core_threshold 0.95 --threads 8 -o panaroo_outoo -i $OUT/panaroo/*.gff --clean-mode strict --remove-invalid-genes --core_threshold 0.95 --threads 8 -o $OUT/panaroo/run1
+
+#ml purge
+#ml eggnog-mapper/2.1.12-foss-2023a
+#mkdir -p $OUT/eggnog
+#find $OUT/prokka -name *.faa -type f | while read -r file; do
+#    cat $file >> $OUT/eggnog/compiled_Paenibacillus_proteins.faa
+#done
+
+#emapper.py -i $OUT/eggnog/compiled_Paenibacillus_proteins.faa --itype proteins --output eggnog_prokka --output_dir $OUT/eggnog --cpu 8
