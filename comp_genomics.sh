@@ -65,8 +65,8 @@ ncbi-genome-download --section refseq --assembly-accessions $ACCESSIONS --output
 #    prokka --outdir "$out_dir" --force --prefix "$name" --genus Paenibacillus --cpus 8 "$file"
 #done
 
-#ml purge
-#ml Roary/3.13.0-foss-2022a
+ml purge
+ml panaroo/1.5.1
 
 mkdir -p $OUT/panaroo
 find $OUT/prokka -name *.gff -type f | while read -r file; do
